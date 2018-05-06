@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Notepad</string>
+    <string name="add_note_title">Add note</string>
+    <string name="edit_note_title">Edit note</string>
+
+    <!-- Screen titles -->
+    <string name="screen_note_list">Note List</string>
+    <string name="screen_note_add">Add note</string>
+    <string name="screen_note_edit">Edit note</string>
+    
+    <!-- Detail -->
+    <string name="detail_header_hint">Header</string>
+    <string name="detail_text_hint">Enter your text here</string>
+
+    <!-- ContentDescriptions -->
+    <string name="add_button_content_description">Add note</string>
+    <string name="edit_button_content_description">Edit note</string>
+    <string name="delete_button_content_description">Delete note</string>
+    <string name="delete_all_button_content_description">Delete all notes</string>
+</resources>

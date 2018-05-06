@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NoteDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/courgette_regular"
+            android:hint="@string/detail_header_hint"
+            android:inputType="textCapSentences"
+            android:maxLines="2"
+            android:padding="16dp"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/courgette_regular"
+            android:gravity="top"
+            android:hint="@string/detail_text_hint"
+            android:inputType="textCapSentences"
+            android:padding="16dp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/colorPrimaryLight"
+        android:contentDescription="@string/add_button_content_description"
+        android:scaleType="fitCenter"
+        android:src="@drawable/add" />
+
+    <ImageButton
+        android:id="@+id/edit_button"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/colorPrimaryLight"
+        android:contentDescription="@string/edit_button_content_description"
+        android:scaleType="fitCenter"
+        android:src="@drawable/edit" />
+</LinearLayout>
