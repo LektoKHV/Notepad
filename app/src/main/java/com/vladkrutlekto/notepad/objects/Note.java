@@ -1,16 +1,38 @@
 package com.vladkrutlekto.notepad.objects;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
-import java.util.Date;
 
+/**
+ * Note object used in database
+ * */
+@Entity(tableName = "notes")
 public class Note implements Serializable {
-    private String name, text;
-    private Date date;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
-    public Note(String name, String text, Date date) {
+    @ColumnInfo(name = "name")
+    private String name;
+    @ColumnInfo(name = "text")
+    private String text;
+    @ColumnInfo(name = "date")
+    private String date;
+
+    public Note(String name, String text, String date) {
         this.name = name;
         this.text = text;
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -29,11 +51,11 @@ public class Note implements Serializable {
         this.text = text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
-    android:showDividers="middle"
+    android:baselineAligned="false"
     tools:context=".NoteListActivity">
 
     <!--
@@ -16,22 +14,85 @@
     
     -->
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/note_list"
-        android:name="com.vladkrutlekto.notepad.NoteListFragment"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:context="com.vladkrutlekto.notepad.NoteListActivity"
-        tools:listitem="@layout/note_list_item" />
+        android:orientation="vertical"
+        android:background="@drawable/background">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/note_list"
+            android:name="com.vladkrutlekto.notepad.NoteListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:context="com.vladkrutlekto.notepad.NoteListActivity"
+            tools:listitem="@layout/note_list_item" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:alpha="0.7"
+                android:background="@color/colorPrimaryLight"
+                android:contentDescription="@string/add_button_content_description"
+                android:scaleType="fitCenter"
+                android:src="@drawable/add" />
+
+            <ImageButton
+                android:id="@+id/delete_all_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:alpha="0.7"
+                android:background="@color/colorPrimaryLight"
+                android:contentDescription="@string/delete_all_button_content_description"
+                android:scaleType="fitCenter"
+                android:src="@drawable/deleteall" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:alpha="0.7"
+            android:background="@color/colorPrimaryLight"
+            android:contentDescription="@string/delete_button_content_description"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/note_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_weight="3">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/detail_background"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="72sp"
+            android:text="Notepad"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/marko_one"
+            android:shadowColor="@android:color/background_dark"
+            android:shadowRadius="10.0"
+            android:shadowDx="-4"
+            android:shadowDy="-4" />
+    </FrameLayout>
 </LinearLayout>

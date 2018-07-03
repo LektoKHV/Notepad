@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".NoteDetailFragment">
 
     <LinearLayout
@@ -30,7 +31,7 @@
             android:fontFamily="@font/courgette_regular"
             android:gravity="top"
             android:hint="@string/detail_text_hint"
-            android:inputType="textCapSentences"
+            android:inputType="textCapSentences|textMultiLine"
             android:padding="16dp" />
     </LinearLayout>
 

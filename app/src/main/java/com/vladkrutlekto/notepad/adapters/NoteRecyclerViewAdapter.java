@@ -13,6 +13,8 @@ import com.vladkrutlekto.notepad.R;
 import com.vladkrutlekto.notepad.objects.Note;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,7 +22,7 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
     private static final String TAG = "NoteListActivity";
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position, boolean wasChoiceModeOn);
     }
 
     public interface OnItemLongClickListener {
@@ -31,8 +33,12 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
     private final NoteListActivity activity;
     private final List<Note> noteList;
     private final boolean isTwoPane;
+
+    private HashSet<Integer> selectedItemPositions = new HashSet<>();
+
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
+
 
     public NoteRecyclerViewAdapter(NoteListActivity parent, List<Note> items, boolean twoPane) {
         noteList = items;
@@ -56,10 +62,13 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
     public void onBindViewHolder(@NonNull final NoteRecyclerViewAdapter.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder(" + position + ")");
 
-        holder.name.setText(noteList.get(position).getName());
-        holder.date.setText(simpleDateFormat.format(noteList.get(position).getDate()));
+        Note note = noteList.get(position);
 
-        holder.itemView.setTag(noteList.get(position));
+        holder.name.setText(note.getName());
+        holder.date.setText(note.getDate());
+
+        holder.itemView.setSelected(false);
+        holder.itemView.setTag(note);
     }
 
     @Override
@@ -89,13 +98,39 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
 
         @Override
         public void onClick(View v) {
-            onItemClickListener.onItemClick(v, getAdapterPosition());
+            boolean wasChoiceModeOn = !selectedItemPositions.isEmpty();
+            if (wasChoiceModeOn) {
+                v.setSelected(!v.isSelected());
+
+                if (v.isSelected()) selectedItemPositions.add(getAdapterPosition());
+                else selectedItemPositions.remove(getAdapterPosition());
+            }
+
+            onItemClickListener.onItemClick(v, getAdapterPosition(), wasChoiceModeOn);
         }
 
         @Override
         public boolean onLongClick(View v) {
+            v.setSelected(!v.isSelected());
+            if (v.isSelected()) selectedItemPositions.add(getAdapterPosition());
+            else selectedItemPositions.remove(getAdapterPosition());
+
             onItemLongClickListener.onLongItemClick(v, getAdapterPosition());
             return true;
         }
+    }
+
+    public HashSet<Integer> getSelectedItemPositions() {
+        return selectedItemPositions;
+    }
+
+    public ArrayList<Note> getSelectedNotes() {
+        ArrayList<Note> selectedNotes = new ArrayList<>();
+
+        for (int i : selectedItemPositions) {
+            selectedNotes.add(noteList.get(i));
+        }
+
+        return selectedNotes;
     }
 }
